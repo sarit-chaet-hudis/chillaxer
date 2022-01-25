@@ -20,6 +20,8 @@ class Scene extends React.Component {
       // positionIterations: 20
     });
 
+    engine.gravity.y = -1;
+
     var render = Render.create({
       element: this.refs.scene,
       engine: engine,
@@ -30,14 +32,14 @@ class Scene extends React.Component {
       },
     });
 
-    var ballA = Bodies.circle(210, 100, 30, { restitution: 0.5 });
-    var ballB = Bodies.circle(110, 50, 30, { restitution: 0.5 });
+    var ballA = Bodies.circle(210, 400, 30, { restitution: 0.5 });
+    var ballB = Bodies.circle(110, 350, 30, { restitution: 0.5 });
     World.add(engine.world, [
       // walls
-      Bodies.rectangle(200, 0, 600, 50, { isStatic: true }),
-      Bodies.rectangle(200, 600, 600, 50, { isStatic: true }),
-      Bodies.rectangle(260, 300, 50, 600, { isStatic: true }),
-      Bodies.rectangle(0, 300, 50, 600, { isStatic: true }),
+      //Bodies.rectangle(200, 0, 600, 50, { isStatic: true }),
+      //Bodies.rectangle(200, 600, 600, 50, { isStatic: true }),
+      //Bodies.rectangle(260, 300, 50, 500, { isStatic: true }),
+      Bodies.rectangle(0, 300, 50, 500, { isStatic: true }),
     ]);
 
     World.add(engine.world, [ballA, ballB]);
@@ -57,10 +59,13 @@ class Scene extends React.Component {
     World.add(engine.world, mouseConstraint);
 
     Matter.Events.on(mouseConstraint, "mousedown", function (event) {
-      World.add(engine.world, Bodies.circle(150, 50, 30, { restitution: 0.7 }));
+      World.add(
+        engine.world,
+        Bodies.circle(150, 650, 30, { restitution: 0.7 })
+      );
     });
 
-    Engine.run(engine);
+    Matter.Engine.run(engine);
 
     Render.run(render);
   }

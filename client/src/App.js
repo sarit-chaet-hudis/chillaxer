@@ -5,7 +5,6 @@ import Scene from "./Components/Scene";
 function App() {
   return (
     <div className="App">
-      smthng?
       <Scene />
     </div>
   );
